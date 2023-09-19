@@ -123,7 +123,7 @@ set(SOURCE_FILES
 
 #ADD_CUSTOM_TARGET(driver DEPENDS src/templates/index.html)
 
-add_executable(${PROJECT_NAME}
+add_executable(pnetblocks
         ${SOURCE_FILES})
 
 add_sanitizers(${PROJECT_NAME})
@@ -215,4 +215,4 @@ endif()
 find_package(HIDAPI)
 set(LIBRARIES ${LIBRARIES} ${HIDAPI_LIBRARIES})
 
-target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
+target_link_libraries(pnetblocks ${LIBRARIES})
