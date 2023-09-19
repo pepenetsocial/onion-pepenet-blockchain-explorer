@@ -28,7 +28,7 @@ rpccalls::rpccalls(
 }
 
 bool
-rpccalls::connect_to_monero_daemon()
+rpccalls::connect_to_pepenet_daemon()
 {
     //std::lock_guard<std::mutex> guard(m_daemon_rpc_mutex);
 
@@ -50,7 +50,7 @@ rpccalls::get_base_fee_estimate(uint64_t grace_blocks,
 
     req.grace_blocks = grace_blocks;
 
-    if (!connect_to_monero_daemon())
+    if (!connect_to_pepenet_daemon())
     {
         cerr << "get_base_fee_estimate: not connected to daemon" << endl;
         return false;
@@ -75,7 +75,7 @@ rpccalls::get_current_height()
 
     std::lock_guard<std::mutex> guard(m_daemon_rpc_mutex);
 
-    if (!connect_to_monero_daemon())
+    if (!connect_to_pepenet_daemon())
     {
         cerr << "get_current_height: not connected to daemon" << endl;
         return false;
@@ -87,7 +87,7 @@ rpccalls::get_current_height()
 
     if (!r)
     {
-        cerr << "Error connecting to Monero daemon at "
+        cerr << "Error connecting to Pepenet daemon at "
              << daemon_url << endl;
         return 0;
     }
@@ -107,7 +107,7 @@ rpccalls::get_mempool(vector<tx_info>& mempool_txs)
     {
         std::lock_guard<std::mutex> guard(m_daemon_rpc_mutex);
 
-        if (!connect_to_monero_daemon())
+        if (!connect_to_pepenet_daemon())
         {
             cerr << "get_mempool: not connected to daemon" << endl;
             return false;
@@ -120,7 +120,7 @@ rpccalls::get_mempool(vector<tx_info>& mempool_txs)
 
     if (!r || res.status != CORE_RPC_STATUS_OK)
     {
-        cerr << "Error connecting to Monero daemon at "
+        cerr << "Error connecting to Pepenet daemon at "
              << daemon_url << endl;
         return false;
     }
@@ -154,7 +154,7 @@ rpccalls::commit_tx(tools::wallet2::pending_tx& ptx, string& error_msg)
 
     std::lock_guard<std::mutex> guard(m_daemon_rpc_mutex);
 
-    if (!connect_to_monero_daemon())
+    if (!connect_to_pepenet_daemon())
     {
         cerr << "commit_tx: not connected to daemon" << endl;
         return false;
@@ -193,7 +193,7 @@ rpccalls::get_network_info(COMMAND_RPC_GET_INFO::response& response)
     {
         std::lock_guard<std::mutex> guard(m_daemon_rpc_mutex);
 
-        if (!connect_to_monero_daemon())
+        if (!connect_to_pepenet_daemon())
         {
             cerr << "get_network_info: not connected to daemon" << endl;
             return false;
@@ -219,14 +219,14 @@ rpccalls::get_network_info(COMMAND_RPC_GET_INFO::response& response)
 
         if (!err.empty())
         {
-            cerr << "Error connecting to Monero daemon due to "
+            cerr << "Error connecting to Pepenet daemon due to "
                  << err << endl;
             return false;
         }
     }
     else
     {
-        cerr << "Error connecting to Monero daemon at "
+        cerr << "Error connecting to Pepenet daemon at "
              << daemon_url << endl;
         return false;
     }
@@ -253,7 +253,7 @@ rpccalls::get_hardfork_info(COMMAND_RPC_HARD_FORK_INFO::response& response)
     {
         std::lock_guard<std::mutex> guard(m_daemon_rpc_mutex);
 
-        if (!connect_to_monero_daemon())
+        if (!connect_to_pepenet_daemon())
         {
             cerr << "get_hardfork_info: not connected to daemon" << endl;
             return false;
@@ -280,14 +280,14 @@ rpccalls::get_hardfork_info(COMMAND_RPC_HARD_FORK_INFO::response& response)
 
         if (!err.empty())
         {
-            cerr << "Error connecting to Monero daemon due to "
+            cerr << "Error connecting to Pepenet daemon due to "
                  << err << endl;
             return false;
         }
     }
     else
     {
-        cerr << "Error connecting to Monero daemon at "
+        cerr << "Error connecting to Pepenet daemon at "
              << daemon_url << endl;
         return false;
     }
@@ -321,7 +321,7 @@ rpccalls::get_dynamic_per_kb_fee_estimate(
     {
         std::lock_guard<std::mutex> guard(m_daemon_rpc_mutex);
 
-        if (!connect_to_monero_daemon())
+        if (!connect_to_pepenet_daemon())
         {
             cerr << "get_dynamic_per_kb_fee_estimate: not connected to daemon" << endl;
             return false;
@@ -348,14 +348,14 @@ rpccalls::get_dynamic_per_kb_fee_estimate(
 
         if (!err.empty())
         {
-            cerr << "Error connecting to Monero daemon due to "
+            cerr << "Error connecting to Pepenet daemon due to "
                  << err << endl;
             return false;
         }
     }
     else
     {
-        cerr << "Error connecting to Monero daemon at "
+        cerr << "Error connecting to Pepenet daemon at "
              << daemon_url << endl;
         return false;
     }
@@ -384,7 +384,7 @@ rpccalls::get_block(string const& blk_hash, block& blk, string& error_msg)
     {
         std::lock_guard<std::mutex> guard(m_daemon_rpc_mutex);
 
-        if (!connect_to_monero_daemon())
+        if (!connect_to_pepenet_daemon())
         {
             cerr << "get_block: not connected to daemon" << endl;
             return false;
@@ -411,14 +411,14 @@ rpccalls::get_block(string const& blk_hash, block& blk, string& error_msg)
 
         if (!err.empty())
         {
-            cerr << "Error connecting to Monero daemon due to "
+            cerr << "Error connecting to Pepenet daemon due to "
                  << err << endl;
             return false;
         }
     }
     else
     {
-        cerr << "get_block: error connecting to Monero daemon at "
+        cerr << "get_block: error connecting to Pepenet daemon at "
              << daemon_url << endl;
         return false;
     }

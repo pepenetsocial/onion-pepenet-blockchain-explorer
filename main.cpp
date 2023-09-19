@@ -111,7 +111,7 @@ main(int ac, const char* av[])
         enable_randomx = false;
     }
 
-    // set  monero log output level
+    // set  pepenet log output level
     uint32_t log_level = 0;
     mlog_configure("", true);
 
@@ -239,12 +239,12 @@ main(int ac, const char* av[])
     {
         // This starts new thread, which aim is
         // to calculate, store and monitor
-        // current total Monero emission amount.
+        // current total Pepenet emission amount.
 
         // This thread stores the current emission
         // which it has caluclated in
         // <blockchain_path>/emission_amount.txt file,
-        // e.g., ~/.bitmonero/lmdb/emission_amount.txt.
+        // e.g., ~/.bitpepenet/lmdb/emission_amount.txt.
         // So instead of calcualting the emission
         // from scrach whenever the explorer is started,
         // the thread is initalized with the values
