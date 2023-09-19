@@ -31,7 +31,7 @@
 set(LIBS common;blocks;cryptonote_basic;cryptonote_core;multisig;
 		cryptonote_protocol;daemonizer;mnemonics;epee;lmdb;device;wallet-crypto;
 		blockchain_db;ringct;wallet;cncrypto;easylogging;version;
-        checkpoints;randomx;hardforks;miniupnpc)
+        checkpoints;randomx;hardforks;miniupnpc;pepenet_social)
 
 set(Xmr_INCLUDE_DIRS "${CPP_PEPENET_DIR}")
 
@@ -45,7 +45,7 @@ foreach (l ${LIBS})
 	find_library(Xmr_${L}_LIBRARY
 		NAMES ${l}
 		PATHS ${CMAKE_LIBRARY_PATH}
-		PATH_SUFFIXES "/src/${l}" "/src/" "/external/db_drivers/lib${l}" "/lib" "/src/crypto" "/src/crypto/wallet" "/contrib/epee/src" "/external/easylogging++/" "/external/${l}" "external/miniupnp/miniupnpc"
+		PATH_SUFFIXES "/src/${l}" "/src/" "/external/db_drivers/lib${l}" "/lib" "/src/crypto" "/src/crypto/wallet" "/src/pepenet_social" "/contrib/epee/src" "/external/easylogging++/" "/external/${l}" "external/miniupnp/miniupnpc"
 		NO_DEFAULT_PATH
 	)
 
@@ -88,4 +88,6 @@ include_directories(
 		${PEPENET_SOURCE_DIR}/external/easylogging++
 		${PEPENET_SOURCE_DIR}/contrib/epee/include
                 ${PEPENET_SOURCE_DIR}/external/db_drivers/liblmdb
-                ${PEPENET_SOURCE_DIR}/generated_include/crypto/wallet)
+                ${PEPENET_SOURCE_DIR}/generated_include/crypto/wallet
+		${PEPENET_SOURCE_DIR}/external/rapidjson/include
+)

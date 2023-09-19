@@ -14,7 +14,7 @@ endif()
 
 
 if (NOT PEPENET_DIR)
-    set(PEPENET_DIR ~/pepenet)
+    set(PEPENET_DIR "ext/pepenet")
 endif()
 
 message(STATUS PEPENET_DIR ": ${PEPENET_DIR}")
@@ -104,6 +104,8 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 # include pepenet
 include_directories(${PEPENET_SOURCE_DIR}/build)
+find_package(Protobuf REQUIRED)
+find_package(Boost COMPONENTS iostreams serialization system filesystem thread program_options regex chrono REQUIRED)
 
 include_directories("ext/mstch/include")
 include_directories("ext/mstch/include/src")
@@ -167,7 +169,19 @@ set(LIBRARIES
         unbound
         curl
         crypto
-        ssl)
+        ssl
+        pepenet_social
+        ${Protobuf_LIBRARIES}
+        Boost::iostreams
+        Boost::serialization
+        Boost::program_options
+        Boost::system
+        Boost::filesystem
+        Boost::thread
+        Boost::regex
+        Boost::chrono
+        lzma
+        )
 
 if(APPLE)
     set(LIBRARIES ${LIBRARIES} "-framework IOKit -framework Foundation")
