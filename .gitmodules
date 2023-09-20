@@ -1,0 +1,3 @@
+[submodule "ext/pepenet"]
+	path = ext/pepenet
+	url = https://github.com/pepenetsocial/pepenet.git

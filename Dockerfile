@@ -1,14 +1,14 @@
 # Use ubuntu:20.04 as base for builder stage image
 FROM ubuntu:20.04 as builder
 
-# Set Monero branch/tag to be used for monerod compilation
+# Set Pepenet branch/tag to be used for pepenetd compilation
 
-ARG MONERO_BRANCH=release-v0.18
+ARG PEPENET_BRANCH=release-v0.18
 
 # Added DEBIAN_FRONTEND=noninteractive to workaround tzdata prompt on installation
 ENV DEBIAN_FRONTEND="noninteractive"
 
-# Install dependencies for monerod and xmrblocks compilation
+# Install dependencies for pepenetd and xmrblocks compilation
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
@@ -43,16 +43,16 @@ ENV BOOST_DEBUG         1
 
 WORKDIR /root
 
-# Clone and compile monerod with all available threads
+# Clone and compile pepenetd with all available threads
 ARG NPROC
-RUN git clone --recursive --branch ${MONERO_BRANCH} https://github.com/monero-project/monero.git \
-    && cd monero \
+RUN git clone --recursive --branch ${PEPENET_BRANCH} https://github.com/pepenet-project/pepenet.git \
+    && cd pepenet \
     && test -z "$NPROC" && nproc > /nproc || echo -n "$NPROC" > /nproc && make -j"$(cat /nproc)"
 
 
 # Copy and cmake/make xmrblocks with all available threads
-COPY . /root/onion-monero-blockchain-explorer/
-WORKDIR /root/onion-monero-blockchain-explorer/build
+COPY . /root/onion-pepenet-blockchain-explorer/
+WORKDIR /root/onion-pepenet-blockchain-explorer/build
 RUN cmake .. && make -j"$(cat /nproc)"
 
 # Use ldd and awk to bundle up dynamic libraries for the final image
@@ -74,19 +74,19 @@ RUN apt-get update \
 COPY --from=builder /lib.zip .
 RUN unzip -o lib.zip && rm -rf lib.zip
 
-# Add user and setup directories for monerod and xmrblocks
-RUN useradd -ms /bin/bash monero \
-    && mkdir -p /home/monero/.bitmonero \
-    && chown -R monero:monero /home/monero/.bitmonero
-USER monero
+# Add user and setup directories for pepenetd and xmrblocks
+RUN useradd -ms /bin/bash pepenet \
+    && mkdir -p /home/pepenet/.bitpepenet \
+    && chown -R pepenet:pepenet /home/pepenet/.bitpepenet
+USER pepenet
 
 # Switch to home directory and install newly built xmrblocks binary
-WORKDIR /home/monero
-COPY --chown=monero:monero --from=builder /root/onion-monero-blockchain-explorer/build/xmrblocks .
-COPY --chown=monero:monero --from=builder /root/onion-monero-blockchain-explorer/build/templates ./templates/
+WORKDIR /home/pepenet
+COPY --chown=pepenet:pepenet --from=builder /root/onion-pepenet-blockchain-explorer/build/xmrblocks .
+COPY --chown=pepenet:pepenet --from=builder /root/onion-pepenet-blockchain-explorer/build/templates ./templates/
 
 # Expose volume used for lmdb access by xmrblocks
-VOLUME /home/monero/.bitmonero
+VOLUME /home/pepenet/.bitpepenet
 
 # Expose default explorer http port
 EXPOSE 8081

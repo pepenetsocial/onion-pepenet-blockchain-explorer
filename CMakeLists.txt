@@ -13,33 +13,33 @@ if (WIN32)
 endif()
 
 
-if (NOT MONERO_DIR)
-    set(MONERO_DIR ~/monero)
+if (NOT PEPENET_DIR)
+    set(PEPENET_DIR "ext/pepenet")
 endif()
 
-message(STATUS MONERO_DIR ": ${MONERO_DIR}")
+message(STATUS PEPENET_DIR ": ${PEPENET_DIR}")
 
-if (NOT MONERO_SOURCE_DIR)
-    set(MONERO_SOURCE_DIR ${MONERO_DIR}
-          CACHE PATH "Path to the root directory for Monero")
+if (NOT PEPENET_SOURCE_DIR)
+    set(PEPENET_SOURCE_DIR ${PEPENET_DIR}
+          CACHE PATH "Path to the root directory for Pepenet")
 endif()
 
-if (NOT MONERO_BUILD_DIR)
-    # set location of monero build tree
-    set(MONERO_BUILD_DIR ${MONERO_SOURCE_DIR}/build/release/
-          CACHE PATH "Path to the build directory for Monero")
+if (NOT PEPENET_BUILD_DIR)
+    # set location of pepenet build tree
+    set(PEPENET_BUILD_DIR ${PEPENET_SOURCE_DIR}/build/release/
+          CACHE PATH "Path to the build directory for Pepenet")
 
-   if (NOT EXISTS ${MONERO_BUILD_DIR})   
+   if (NOT EXISTS ${PEPENET_BUILD_DIR})   
         # try different location   
-        message(STATUS "Trying different folder for monero libraries")
-        set(MONERO_BUILD_DIR ${MONERO_SOURCE_DIR}/build/Linux/master/release/
-            CACHE PATH "Path to the build directory for Monero" FORCE)
+        message(STATUS "Trying different folder for pepenet libraries")
+        set(PEPENET_BUILD_DIR ${PEPENET_SOURCE_DIR}/build/Linux/master/release/
+            CACHE PATH "Path to the build directory for Pepenet" FORCE)
     endif()
 
 endif()
 
-if (NOT EXISTS ${MONERO_BUILD_DIR})   
-  message(FATAL_ERROR "Monero libraries not found in: ${MONERO_BUILD_DIR}")
+if (NOT EXISTS ${PEPENET_BUILD_DIR})   
+  message(FATAL_ERROR "Pepenet libraries not found in: ${PEPENET_BUILD_DIR}")
 endif()
 
 set(MY_CMAKE_DIR "${CMAKE_CURRENT_LIST_DIR}/cmake"
@@ -47,11 +47,11 @@ set(MY_CMAKE_DIR "${CMAKE_CURRENT_LIST_DIR}/cmake"
 
 list(APPEND CMAKE_MODULE_PATH "${MY_CMAKE_DIR}")
 
-set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "${MONERO_BUILD_DIR}"
-        CACHE PATH "Add Monero directory for library searching")
+set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "${PEPENET_BUILD_DIR}"
+        CACHE PATH "Add Pepenet directory for library searching")
 include(MyUtils)
 
-find_package(Monero)
+find_package(Pepenet)
 
 # find boost
 find_package(Boost COMPONENTS
@@ -75,7 +75,7 @@ if(APPLE)
     link_directories(/usr/local/lib)
 endif()
 
-MESSAGE(STATUS "Looking for libunbound") # FindUnbound.cmake from monero repo
+MESSAGE(STATUS "Looking for libunbound") # FindUnbound.cmake from pepenet repo
 
 FIND_PATH(UNBOUND_INCLUDE_DIR
   NAMES unbound.h
@@ -90,7 +90,7 @@ FIND_PATH(UNBOUND_INCLUDE_DIR
 find_library (UNBOUND_LIBRARY unbound)
 if (WIN32 OR (${UNBOUND_LIBRARY} STREQUAL "UNBOUND_LIBRARY-NOTFOUND"))
     add_library(unbound STATIC IMPORTED)
-    set_property(TARGET unbound PROPERTY IMPORTED_LOCATION ${MONERO_BUILD_DIR}/external/unbound/libunbound.a)
+    set_property(TARGET unbound PROPERTY IMPORTED_LOCATION ${PEPENET_BUILD_DIR}/external/unbound/libunbound.a)
 endif()
 
 if("${Xmr_WALLET-CRYPTO_LIBRARIES}" STREQUAL "Xmr_WALLET-CRYPTO_LIBRARY-NOTFOUND")
@@ -102,8 +102,10 @@ endif()
 # include boost headers
 include_directories(${Boost_INCLUDE_DIRS})
 
-# include monero
-include_directories(${MONERO_SOURCE_DIR}/build)
+# include pepenet
+include_directories(${PEPENET_SOURCE_DIR}/build)
+find_package(Protobuf REQUIRED)
+find_package(Boost COMPONENTS iostreams serialization system filesystem thread program_options regex chrono REQUIRED)
 
 include_directories("ext/mstch/include")
 include_directories("ext/mstch/include/src")
@@ -121,7 +123,7 @@ set(SOURCE_FILES
 
 #ADD_CUSTOM_TARGET(driver DEPENDS src/templates/index.html)
 
-add_executable(${PROJECT_NAME}
+add_executable(pnetblocks
         ${SOURCE_FILES})
 
 add_sanitizers(${PROJECT_NAME})
@@ -167,7 +169,19 @@ set(LIBRARIES
         unbound
         curl
         crypto
-        ssl)
+        ssl
+        pepenet_social
+        ${Protobuf_LIBRARIES}
+        Boost::iostreams
+        Boost::serialization
+        Boost::program_options
+        Boost::system
+        Boost::filesystem
+        Boost::thread
+        Boost::regex
+        Boost::chrono
+        lzma
+        )
 
 if(APPLE)
     set(LIBRARIES ${LIBRARIES} "-framework IOKit -framework Foundation")
@@ -201,4 +215,4 @@ endif()
 find_package(HIDAPI)
 set(LIBRARIES ${LIBRARIES} ${HIDAPI_LIBRARIES})
 
-target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
+target_link_libraries(pnetblocks ${LIBRARIES})

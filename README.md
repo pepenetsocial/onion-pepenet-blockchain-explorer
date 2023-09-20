@@ -1,6 +1,6 @@
-# Onion Monero Blockchain Explorer
+# Onion Pepenet Blockchain Explorer
 
-Currently available Monero blockchain explorers have several limitations which are of
+Currently available Pepenet blockchain explorers have several limitations which are of
 special importance to privacy-oriented users:
 
  - they use JavaScript,
@@ -8,13 +8,13 @@ special importance to privacy-oriented users:
  - track users activities through google analytics,
  - are closed sourced,
  - are not available as hidden services,
- - do not support Monero testnet nor stagenet networks,
+ - do not support Pepenet testnet nor stagenet networks,
  - have limited JSON API.
 
 
 In this example, these limitations are addressed by development of
-an Onion Monero Blockchain Explorer. The example not only shows how to use
-Monero C++ libraries, but also demonstrates how to use:
+an Onion Pepenet Blockchain Explorer. The example not only shows how to use
+Pepenet C++ libraries, but also demonstrates how to use:
 
  - [crow](https://github.com/ipkn/crow) - C++ micro web framework
  - [mstch](https://github.com/no1msd/mstch) - C++ {{mustache}} templates
@@ -25,8 +25,8 @@ Monero C++ libraries, but also demonstrates how to use:
 
 Clearnet versions:
  - [https://xmrchain.net/](https://xmrchain.net/) - HTTPS enabled, most popular, and very stable.
- - [https://monerohash.com/explorer/](https://monerohash.com/explorer/) - nice looking one, HTTPS enabled.
- - [http://monerochain.com/](http://monerochain.com/) - JSON API based, multiple nodes.   
+ - [https://pepenethash.com/explorer/](https://pepenethash.com/explorer/) - nice looking one, HTTPS enabled.
+ - [http://pepenetchain.com/](http://pepenetchain.com/) - JSON API based, multiple nodes.   
  - [https://blox.minexmr.com/](https://blox.minexmr.com/) - HTTPS enabled.
 
 Testnet version:
@@ -37,7 +37,7 @@ Stagenet version:
  
  - [https://stagenet.xmrchain.net/](https://stagenet.xmrchain.net/)
 
-i2p users (main Monero network):
+i2p users (main Pepenet network):
 
  - [http://7o4gezpkye6ekibhgpkg7v626ze4idsirapufzrefkdysa6zxhha.b32.i2p/](http://7o4gezpkye6ekibhgpkg7v626ze4idsirapufzrefkdysa6zxhha.b32.i2p/)
 
@@ -47,13 +47,13 @@ Tor versions:
 
 Alternative block explorers:
 
-- [https://localmonero.co/blocks](https://localmonero.co/blocks)
-- [https://monerovision.com](https://monerovision.com)
+- [https://localpepenet.co/blocks](https://localpepenet.co/blocks)
+- [https://pepenetvision.com](https://pepenetvision.com)
 
 
-## Onion Monero Blockchain Explorer features
+## Onion Pepenet Blockchain Explorer features
 
-The key features of the Onion Monero Blockchain Explorer are:
+The key features of the Onion Pepenet Blockchain Explorer are:
 
  - no cookies, no web analytics trackers, no images,
  - open sourced,
@@ -61,12 +61,12 @@ The key features of the Onion Monero Blockchain Explorer are:
  - showing encrypted payments ID,
  - showing ring signatures,
  - showing transaction extra field,
- - showing public components of Monero addresses,
- - decoding which outputs and mixins belong to the given Monero address and viewkey,
- - can prove that you send Monero to someone,
+ - showing public components of Pepenet addresses,
+ - decoding which outputs and mixins belong to the given Pepenet address and viewkey,
+ - can prove that you send Pepenet to someone,
  - detailed information about ring members, such as their age, timescale, and ring sizes,
  - showing number of amount output indices,
- - support Monero testnet and stagnet networks,
+ - support Pepenet testnet and stagnet networks,
  - tx checker and pusher for online pushing of transactions,
  - estimate possible spendings based on address and viewkey,
  - can provide total amount of all miner fees,
@@ -78,34 +78,34 @@ The key features of the Onion Monero Blockchain Explorer are:
 
 Current development branch:
 
- - https://github.com/moneroexamples/onion-monero-blockchain-explorer/tree/devel
+ - https://github.com/pepenetexamples/onion-pepenet-blockchain-explorer/tree/devel
 
-Note: `devel` branch of the explorer follows `master` branch of the monero!
+Note: `devel` branch of the explorer follows `master` branch of pepenet!
 
 ## Compilation on Ubuntu 18.04/20.04
 
 
-#### Monero download and compilation
+#### Pepenet download and compilation
 
-To download and compile recent Monero follow instructions
+To download and compile recent Pepenet follow instructions
 in the following link:
 
-https://github.com/moneroexamples/monero-compilation/blob/master/README.md
+https://github.com/pepenetexamples/pepenet-compilation/blob/master/README.md
 
 ##### Compile and run the explorer
 
-Once the Monero compiles, the explorer can be downloaded and compiled
+Once the Pepenet compiles, the explorer can be downloaded and compiled
 as follows:
 
 ```bash
-# go to home folder if still in ~/monero
+# go to home folder if still in ~/pepenet
 cd ~
 
 # download the source code 
-git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
+git clone https://github.com/pepenetexamples/onion-pepenet-blockchain-explorer.git
 
 # enter the downloaded sourced code folder
-cd onion-monero-blockchain-explorer
+cd onion-pepenet-blockchain-explorer
 
 # make a build folder and enter it
 mkdir build && cd build
@@ -123,19 +123,19 @@ To run it:
 ./xmrblocks
 ```
 
-By default it will look for blockchain in its default location i.e., `~/.bitmonero/lmdb`.
+By default it will look for blockchain in its default location i.e., `~/.bitpepenet/lmdb`.
 You can use `-b` option if its in different location.
 
 For example:
 
 ```bash
-./xmrblocks -b /home/mwo/non-default-monero-location/lmdb/
+./xmrblocks -b /home/mwo/non-default-pepenet-location/lmdb/
 ```
 
 Example output:
 
 ```bash
-[mwo@arch onion-monero-blockchain-explorer]$ ./xmrblocks
+[mwo@arch onion-pepenet-blockchain-explorer]$ ./xmrblocks
 2016-May-28 10:04:49.160280 Blockchain initialized. last block: 1056761, d0.h0.m12.s47 time ago, current difficulty: 1517857750
 (2016-05-28 02:04:49) [INFO    ] Crow/0.1 server is running, local port 8081
 ```
@@ -145,7 +145,7 @@ Go to your browser: http://127.0.0.1:8081
 ## Compiling and running with Docker
 
 The explorer can also be compiled using `docker build` as described below. By default it compiles
-against latest release (`release-v0.17`) branch of monero:
+against latest release (`release-v0.17`) branch of pepenet:
 
 ```
 # build using all CPU cores
@@ -154,27 +154,27 @@ docker build --no-cache -t xmrblocks .
 # alternatively, specify number of cores to use (e.g. 2)
 docker build --no-cache --build-arg NPROC=2  -t xmrblocks .
 
-# to build against development branch of monero (i.e. master branch)
-docker build --no-cache --build-arg NPROC=3 --build-arg MONERO_BRANCH=master  -t xmrblocks .
+# to build against development branch of pepenet (i.e. master branch)
+docker build --no-cache --build-arg NPROC=3 --build-arg PEPENET_BRANCH=master  -t xmrblocks .
 ```
 
 - The build needs 3 GB space.
 - The final container image is 179MB.
 
-To run it, mount the monero blockchain onto the container as volume.
+To run it, mount the pepenet blockchain onto the container as volume.
 
 ```
 # either run in foreground
-docker run -it -v <path-to-monero-blockckain-on-the-host>:/home/monero/.bitmonero -p 8081:8081  xmrblocks
+docker run -it -v <path-to-pepenet-blockckain-on-the-host>:/home/pepenet/.bitpepenet -p 8081:8081  xmrblocks
 
 # or in background
-docker run -it -d -v <path-to-monero-blockchain-on-the-host>:/home/monero/.bitmonero -p 8081:8081  xmrblocks
+docker run -it -d -v <path-to-pepenet-blockchain-on-the-host>:/home/pepenet/.bitpepenet -p 8081:8081  xmrblocks
 ```
 
 Example output:
 
 ```
-docker run --rm -it -v /mnt/w7/bitmonero:/home/monero/.bitmonero -p 8081:8081 xmrblocks
+docker run --rm -it -v /mnt/w7/bitpepenet:/home/pepenet/.bitpepenet -p 8081:8081 xmrblocks
 Staring in non-ssl mode
 (2020-04-20 16:20:00) [INFO    ] Crow/0.1 server is running at 0.0.0.0:8081 using 1 threads
 ```
@@ -186,12 +186,12 @@ The explorer can also be built and run using Docker Compose, i.e.:
 ```yaml
 version: '3'
 services:
-  monerod:
-    image: sethsimmons/simple-monerod:latest
+  pepenetd:
+    image: sethsimmons/simple-pepenetd:latest
     restart: unless-stopped
-    container_name: monerod
+    container_name: pepenetd
     volumes:
-      - xmrdata:/home/monero/.bitmonero
+      - xmrdata:/home/pepenet/.bitpepenet
     ports:
       - 18080:18080
       - 18089:18089
@@ -205,14 +205,14 @@ services:
 
   explore:
     image: xmrblocks:latest
-    build: ./onion-monero-blockchain-explorer
+    build: ./onion-pepenet-blockchain-explorer
     container_name: explore
     restart: unless-stopped
     volumes:
-      - xmrdata:/home/monero/.bitmonero
+      - xmrdata:/home/pepenet/.bitpepenet
     ports:
       - 8081:8081
-    command: ["./xmrblocks --daemon-url=monerod:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"]
+    command: ["./xmrblocks --daemon-url=pepenetd:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"]
 
   volumes:
     xmrdata:
@@ -221,14 +221,14 @@ services:
 To build this image, run the following:
 
 ```bash
-git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
+git clone https://github.com/pepenetexamples/onion-pepenet-blockchain-explorer.git
 docker-compose build
 ```
 
 Or build and run in one step via:
 
 ```bash
-git clone https://github.com/moneroexamples/onion-monero-blockchain-explorer.git
+git clone https://github.com/pepenetexamples/onion-pepenet-blockchain-explorer.git
 docker-compose up -d
 ```
 
@@ -238,7 +238,7 @@ When running via Docker, please use something like [Traefik](https://doc.traefik
 ## The explorer's command line options
 
 ```
-xmrblocks, Onion Monero Blockchain Explorer:
+xmrblocks, Onion Pepenet Blockchain Explorer:
   -h [ --help ] [=arg(=1)] (=0)         produce help message
   -t [ --testnet ] [=arg(=1)] (=0)      use testnet blockchain
   -s [ --stagenet ] [=arg(=1)] (=0)     use stagenet blockchain
@@ -258,7 +258,7 @@ xmrblocks, Onion Monero Blockchain Explorer:
                                         enable users to have the index page on
                                         autorefresh
   --enable-emission-monitor [=arg(=1)] (=0)
-                                        enable Monero total emission monitoring
+                                        enable Pepenet total emission monitoring
                                         thread
   -p [ --port ] arg (=8081)             default explorer port
   -x [ --bindaddr ] arg (=0.0.0.0)      default bind address for the explorer
@@ -281,13 +281,13 @@ xmrblocks, Onion Monero Blockchain Explorer:
                                         queries. Default is 0 which means it is
                                         based you on the cpu
   -b [ --bc-path ] arg                  path to lmdb folder of the blockchain,
-                                        e.g., ~/.bitmonero/lmdb
+                                        e.g., ~/.bitpepenet/lmdb
   --ssl-crt-file arg                    path to crt file for ssl (https)
                                         functionality
   --ssl-key-file arg                    path to key file for ssl (https)
                                         functionality
   -d [ --daemon-url ] arg (=http:://127.0.0.1:18081)
-                                        Monero daemon url
+                                        Pepenet daemon url
   --daemon-login arg                    Specify username[:password] for daemon 
                                         RPC client
   --enable-mixin-guess [=arg(=1)] (=0)  enable guessing real outputs in key
@@ -297,27 +297,27 @@ Example usage, defined as bash aliases.
 
 ```bash
 # for mainnet explorer
-alias xmrblocksmainnet='~/onion-monero-blockchain-explorer/build/xmrblocks    --port 8081 --testnet-url "http://139.162.32.245:8082" --enable-pusher --enable-emission-monitor'
+alias xmrblocksmainnet='~/onion-pepenet-blockchain-explorer/build/xmrblocks    --port 8081 --testnet-url "http://139.162.32.245:8082" --enable-pusher --enable-emission-monitor'
 
 # for testnet explorer
-alias xmrblockstestnet='~/onion-monero-blockchain-explorer/build/xmrblocks -t --port 8082 --mainnet-url "http://139.162.32.245:8081" --enable-pusher --enable-emission-monitor'
+alias xmrblockstestnet='~/onion-pepenet-blockchain-explorer/build/xmrblocks -t --port 8082 --mainnet-url "http://139.162.32.245:8081" --enable-pusher --enable-emission-monitor'
 ```
 
 Example usage when running via Docker:
 
 ```bash
 # Run in foreground
-docker run -it -v <path-to-monero-blockckain-on-the-host>:/home/monero/.bitmonero -p 8081:8081  xmrblocks "./xmrblocks --daemon-url=node.sethforprivacy.com:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"
+docker run -it -v <path-to-pepenet-blockckain-on-the-host>:/home/pepenet/.bitpepenet -p 8081:8081  xmrblocks "./xmrblocks --daemon-url=node.sethforprivacy.com:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"
 
 # Run in background
-docker run -it -d -v <path-to-monero-blockchain-on-the-host>:/home/monero/.bitmonero -p 8081:8081  xmrblocks "./xmrblocks --daemon-url=node.sethforprivacy.com:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"
+docker run -it -d -v <path-to-pepenet-blockchain-on-the-host>:/home/pepenet/.bitpepenet -p 8081:8081  xmrblocks "./xmrblocks --daemon-url=node.sethforprivacy.com:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"
 ```
 
 Make sure to always start the portion of command line flags with `./xmrblocks` and set any flags you would like after that, as shown above.
 
-## Enable Monero emission
+## Enable Pepenet emission
 
-Obtaining current Monero emission amount is not straight forward. Thus, by default it is
+Obtaining current Pepenet emission amount is not straight forward. Thus, by default it is
 disabled. To enable it use `--enable-emission-monitor` flag, e.g.,
 
 
@@ -329,10 +329,10 @@ This flag will enable emission monitoring thread. When started, the thread
  will initially scan the entire blockchain, and calculate the cumulative emission based on each block.
 Since it is a separate thread, the explorer will work as usual during this time.
 Every 10000 blocks, the thread will save current emission in a file, by default,
- in `~/.bitmonero/lmdb/emission_amount.txt`. For testnet or stagenet networks,
- it is `~/.bitmonero/testnet/lmdb/emission_amount.txt` or `~/.bitmonero/stagenet/lmdb/emission_amount.txt`. This file is used so that we don't
+ in `~/.bitpepenet/lmdb/emission_amount.txt`. For testnet or stagenet networks,
+ it is `~/.bitpepenet/testnet/lmdb/emission_amount.txt` or `~/.bitpepenet/stagenet/lmdb/emission_amount.txt`. This file is used so that we don't
  need to rescan entire blockchain whenever the explorer is restarted. When the
- explorer restarts, the thread will first check if `~/.bitmonero/lmdb/emission_amount.txt`
+ explorer restarts, the thread will first check if `~/.bitpepenet/lmdb/emission_amount.txt`
  is present, read its values, and continue from there if possible. Subsequently, only the initial
  use of the thread is time consuming. Once the thread scans the entire blockchain, it updates
  the emission amount using new blocks as they come. Since the explorer writes this file, there can
@@ -346,10 +346,10 @@ Every 10000 blocks, the thread will save current emission in a file, by default,
  displayed on the front page, e.g., :
 
 ```
-Monero emission (fees) is 14485540.430 (52545.373) as of 1313448 block
+Pepenet emission (fees) is 14485540.430 (52545.373) as of 1313448 block
 ```
 
-The values given, can be checked using Monero daemon's  `print_coinbase_tx_sum` command.
+The values given, can be checked using Pepenet daemon's  `print_coinbase_tx_sum` command.
 For example, for the above example: `print_coinbase_tx_sum 0 1313449`.
 
 To disable the monitor, simply restart the explorer without `--enable-emission-monitor` flag.
@@ -652,7 +652,7 @@ For this, we use recipient's address and our tx private key as a viewkey value,
 Checking outputs:
 
 ```bash
-# we use here official Monero project's donation address as an example
+# we use here official Pepenet project's donation address as an example
 curl  -w "\n" -X GET "http://127.0.0.1:8081/api/outputs?txhash=17049bc5f2d9fbca1ce8dae443bbbbed2fc02f1ee003ffdd0571996905faa831&address=44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A&viewkey=f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501&txprove=0"
 ```
 
@@ -838,10 +838,10 @@ curl  -w "\n" -X GET "http://127.0.0.1:8081/api/version"
   "data": {
     "api": 65536,
     "blockchain_height": 1357031,
-    "git_branch_name": "update_to_current_monero",
+    "git_branch_name": "update_to_current_pepenet",
     "last_git_commit_date": "2017-07-25",
     "last_git_commit_hash": "a549f25",
-    "monero_version_full": "0.10.3.1-ab594cfe"
+    "pepenet_version_full": "0.10.3.1-ab594cfe"
   },
   "status": "success"
 }
@@ -858,7 +858,7 @@ var api_minor = response.data.api & 0xffff;
 
 #### api/rawblock/<block_number|block_hash>
 
-Return raw json block data, as represented in Monero.
+Return raw json block data, as represented in Pepenet.
 
 ```bash
 curl  -w "\n" -X GET "http://139.162.32.245:8081/api/rawblock/1293257"
@@ -868,7 +868,7 @@ Example result not shown.
 
 #### api/rawtransaction/<tx_hash>
 
-Return raw json tx data, as represented in Monero.
+Return raw json tx data, as represented in Pepenet.
 
 ```bash
 curl  -w "\n" -X GET "http://139.162.32.245:8081/api/rawtransaction/6093260dbe79fd6277694d14789dc8718f1bd54457df8bab338c2efa3bb0f03d"
@@ -876,9 +876,9 @@ curl  -w "\n" -X GET "http://139.162.32.245:8081/api/rawtransaction/6093260dbe79
 
 Example result not shown.
 
-## Other monero examples
+## Other pepenet examples
 
-Other examples can be found on  [github](https://github.com/moneroexamples?tab=repositories).
+Other examples can be found on  [github](https://github.com/pepenetexamples?tab=repositories).
 Please know that some of the examples/repositories are not
 finished and may not work as intended.
 

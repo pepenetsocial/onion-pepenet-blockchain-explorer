@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include "monero_headers.h"
+#include "pepenet_headers.h"
 #include "tools.h"
 
 namespace xmreg
